@@ -18,8 +18,8 @@ const parseInput = input => {
 const applyCommand = (stacks, command) => {
     const [numberCrates, origin, destination] = command
     const cratesBeingMoved = stacks[origin-1].slice(-numberCrates)
-    console.log(cratesBeingMoved)
-    stacks[origin-1].splice(0, stacks[origin-1].length-numberCrates)
+    for(i=1; i<=numberCrates; i++)
+        stacks[origin-1].pop()
     stacks[destination-1] = [...stacks[destination-1], ...cratesBeingMoved]
     return stacks
 }

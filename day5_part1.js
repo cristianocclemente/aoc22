@@ -42,7 +42,6 @@ const toMessage = stacks => {
 
 const main = input => {
     const [stacks, commands] = parseInput(input)
-    console.log(stacks)
     const finalStacks = applyCommands(stacks, commands)
     const message = toMessage(finalStacks)
     return message
