@@ -1,7 +1,7 @@
 const parseInput = input => {
     const matrix = input.split('\n').map(line => line.split(''))
     const adjacencyList = {}
-    let start
+    const starts = []
     let finish
     for(let l=0; l<=matrix.length-1; l++) {
         for(let c=0; c<=matrix[0].length-1; c++) {
@@ -9,8 +9,11 @@ const parseInput = input => {
 
             const currentChar = matrix[l][c]
             let currentValue
+
+            if(currentChar === 'a') starts.push(`${c},${l}`)
+
             if(currentChar === 'S') {
-                start=`${c},${l}`
+                starts.push(`${c},${l}`)
                 currentValue='a'.charCodeAt()
             }
             else if(currentChar === 'E') {
@@ -58,11 +61,11 @@ const parseInput = input => {
             adjacencyList[`${c},${l}`] = list
         }
     }
-    return [adjacencyList, start, finish]
+    return [adjacencyList, starts, finish]
 }
 
-const shortestPath = (adjacencyList, start, finish) => {
-    let listPoints = [start]
+const shortestPath = (adjacencyList, starts, finish) => {
+    let listPoints = starts
     let visited = []
     let stepsTaken = 0
     while(true) {
@@ -82,8 +85,8 @@ const shortestPath = (adjacencyList, start, finish) => {
 }
 
 const main = input => {
-    const [adjacencyList, start, finish] = parseInput(input)
-    return shortestPath(adjacencyList, start, finish)
+    const [adjacencyList, starts, finish] = parseInput(input)
+    return shortestPath(adjacencyList, starts, finish)
 }
 
 console.log(main(`Sabqponm
